@@ -2,10 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
-
-
-
-
+from app.tasks import tasks_bp  
 
 db = SQLAlchemy() 
 migrate = Migrate()
@@ -29,8 +26,9 @@ def create_app():
     from app.auth import auth
     from app.auth import routes
     app.register_blueprint(auth)
-    
-    
+
+
+    app.register_blueprint(tasks_bp)  # Registra o blueprint de tarefas
 
     @app.route('/')
     def home():
