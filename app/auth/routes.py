@@ -15,7 +15,7 @@ def login():
             flash('Login realizado com sucesso!', 'success')
             return redirect(url_for('home'))
         flash('Usuário ou senha inválidos', 'danger')
-    return render_template('login.html', form=form)
+    return render_template('auth/login.html', form=form)
 
 @auth.route('/register', methods=['GET', 'POST'])
 def register():

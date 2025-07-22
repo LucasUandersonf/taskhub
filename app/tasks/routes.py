@@ -2,15 +2,15 @@ from flask import render_template, redirect, url_for, flash, request
 from flask_login import login_required, current_user
 from app.models import Task, db
 from app.forms import TaskForm
-from app.tasks import tasks
+from app.tasks import tasks_bp
 
-@tasks.route('/tasks')
+@tasks_bp.route('/')
 @login_required
 def task_list():
     tasks = Task.query.filter_by(user_id = current_user.id).order_by(Task.timestamp.desc()).all()
     return render_template('tasks/list.html', tasks = tasks)
 
-@tasks.route('/tasks/create', methods = ['GET', 'POST'])
+@tasks_bp.route('/create', methods = ['GET', 'POST'])
 @login_required
 def create_task():
     form = TaskForm()
@@ -29,7 +29,7 @@ def create_task():
 
 
 
-@tasks.route('/tasks/<int:task_id>/edit', methods = ['GET', 'POST'])
+@tasks_bp.route('/<int:task_id>/edit', methods = ['GET', 'POST'])
 @login_required
 def edit_task(task_id):
     task = Task.query.get_or_404(task_id)
@@ -48,7 +48,7 @@ def edit_task(task_id):
     return  render_template('tasks/edit.html', form= form, task=task)
 
 
-@tasks.route('/tasks/<int:task_id>/delete', methods=['POST'])
+@tasks_bp.route('/<int:task_id>/delete', methods=['POST'])
 @login_required
 def delete_task(task_id):
     task = Task.query.get_or_404(task_id)
