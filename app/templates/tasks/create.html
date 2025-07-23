@@ -1,11 +1,32 @@
 {% extends 'base.html' %}
+{% block title %}Nova Tarefa - TaskHub{% endblock %}
+
 {% block content %}
-  <h2>Nova Tarefa</h2>
+  <h2 class="mb-4">Criar Nova Tarefa</h2>
   <form method="POST">
     {{ form.hidden_tag() }}
-    {{ form.title.label }} {{ form.title() }}<br>
-    {{ form.description.label }} {{ form.description() }}<br>
-    {{ form.done.label }} {{ form.done() }}<br>
-    {{ form.submit() }}
+
+    <div class="mb-3">
+      {{ form.title.label(class="form-label") }}
+      {{ form.title(class="form-control") }}
+      {% for error in form.title.errors %}
+        <div class="text-danger">{{ error }}</div>
+      {% endfor %}
+    </div>
+
+    <div class="mb-3">
+      {{ form.description.label(class="form-label") }}
+      {{ form.description(class="form-control") }}
+      {% for error in form.description.errors %}
+        <div class="text-danger">{{ error }}</div>
+      {% endfor %}
+    </div>
+
+    <div class="form-check mb-3">
+      {{ form.done(class="form-check-input") }}
+      {{ form.done.label(class="form-check-label") }}
+    </div>
+
+    <button type="submit" class="btn btn-success">💾 Salvar Tarefa</button>
   </form>
 {% endblock %}

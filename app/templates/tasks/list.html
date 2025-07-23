@@ -1,19 +1,33 @@
 {% extends 'base.html' %}
-{% block title %} Minhas Tarefas - TaskHub {$ endblock %}
+{% block title %}Minhas Tarefas - TaskHub{% endblock %}
+
 {% block content %}
-  <h2>Minhas Tarefas</h2>
-  <a href="{{ url_for('tasks.create_task') }}">Nova Tarefa</a>
-  <ul>
-    {% for task in tasks %}
-      <li>
-        <strong>{{ task.title }}</strong> - 
-        {% if task.done %}✅{% else %}❌{% endif %}
-        <br>
-        <a href="{{ url_for('tasks.edit_task', task_id=task.id) }}">Editar</a> |
-        <form action="{{ url_for('tasks.delete_task', task_id=task.id) }}" method="POST" style="display:inline;">
-          <button type="submit">Excluir</button>
-        </form>
-      </li>
-    {% endfor %}
-  </ul>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Minhas Tarefas</h2>
+    <a href="{{ url_for('tasks.create_task') }}" class="btn btn-success">+ Nova Tarefa</a>
+  </div>
+
+  {% if tasks %}
+    <div class="list-group">
+      {% for task in tasks %}
+        <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+          <div class="ms-2 me-auto">
+            <div class="fw-bold">{{ task.title }}</div>
+            <small class="text-muted">{{ task.description or 'Sem descrição.' }}</small><br>
+            <span class="badge bg-{{ 'success' if task.done else 'secondary' }}">
+              {{ 'Concluída ✅' if task.done else 'Pendente ❌' }}
+            </span>
+          </div>
+          <div class="d-flex flex-column gap-2">
+            <a href="{{ url_for('tasks.edit_task', task_id=task.id) }}" class="btn btn-sm btn-outline-primary">✏️ Editar</a>
+            <form method="POST" action="{{ url_for('tasks.delete_task', task_id=task.id) }}">
+              <button type="submit" class="btn btn-sm btn-outline-danger">🗑️ Excluir</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="alert alert-info">Você ainda não tem tarefas. Que tal criar uma?</div>
+  {% endif %}
 {% endblock %}
