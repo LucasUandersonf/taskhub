@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, flash, request
 from flask_login import login_required, current_user
 from app.models import Task, db
-from app.forms import TaskForm
+from app.forms.task_forms import TaskForm
 from app.tasks import tasks_bp
 
 @tasks_bp.route('/')
