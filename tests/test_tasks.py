@@ -28,3 +28,12 @@ def test_create_task(client, app):
     with app.app_context():
         task = Task.query.filter_by(title = 'Estudar Python').first()
         assert task is not None
+
+
+def teste_create_task_nao_logado(client):
+    response = client.post('/create', data={
+        'title': 'Hackear tudo',
+        'description': 'Sem login mesmo'
+    }, follow_redirects=True)  # <-- CORRETO
+    
+    assert  b'Voce precisa estar logado' in response.get_data(as_text=True)
