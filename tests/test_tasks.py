@@ -63,3 +63,28 @@ def test_update_task(client, app):
     with app.app_context():
         updated = Task.query.get(task.id) 
         assert updated.title == 'Tarefa Atualizada'
+
+
+def test_delete_task(client, app):
+    with app.app_context():
+        user = User(username="lucas", email="lucas@example.com", password=generate_password_hash("123456"))
+        db.session.add(user)
+        db.session.commit()
+
+        task = Task(title='Apagar essa', description='desc', user_id=user.id)
+        db.session.add(task)
+        db.session.commit()
+
+    # Login
+    client.post('/login', data={
+        'email': 'lucas@example.com',
+        'password': '123456'
+    }, follow_redirects=True)
+
+    # Deleta a tarefa
+    response = client.get(f'/delete/{task.id}', follow_redirects=True)
+
+    assert b'Tarefa deletada com sucesso' in response.data
+    with app.app_context():
+        deleted = Task.query.get(task.id)
+        assert deleted is None
