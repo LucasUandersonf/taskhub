@@ -37,3 +37,14 @@ def teste_create_task_nao_logado(client):
     }, follow_redirects=True)  # <-- CORRETO
     
     assert  b'Voce precisa estar logado' in response.get_data(as_text=True)
+
+
+def test_update_task(client, app):
+    with app.app_context():
+        user = User(username = "lucas", email = "lucas@example.com", password = generate_password_hash("123456"))
+        db.session.add(user)
+        db.session.commit()
+        #Cria uma tarefa ligada ao a esse usuario 
+        task = Task(title = "Tarefa antiga", description = "desc", user_id = user.id)
+        db.session.add(task)
+        db.session.commit()
