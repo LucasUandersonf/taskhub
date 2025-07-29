@@ -48,3 +48,18 @@ def test_update_task(client, app):
         task = Task(title = "Tarefa antiga", description = "desc", user_id = user.id)
         db.session.add(task)
         db.session.commit()
+
+    #login 
+    client.post('/login', data = {
+        'email':'lucas@example.com', 
+        'password':'123456'}, follow_redirects = True )
+    #atualizae tarefa 
+    response = client.post(f'/update/{task.id}', data = { 
+        'title':'tarefa atualiza', 
+        'description':'Nova descriçao'
+    }, follow_redirects = True)
+
+    assert b'Tarefa atualizada com sucesso' in response.data 
+    with app.app_context():
+        updated = Task.query.get(task.id) 
+        assert updated.title == 'Tarefa Atualizada'
