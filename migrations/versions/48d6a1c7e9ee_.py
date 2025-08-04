@@ -1,8 +1,8 @@
-"""Criação das tabelas User e Task
+"""empty message
 
-Revision ID: 84f4941e2064
+Revision ID: 48d6a1c7e9ee
 Revises: 
-Create Date: 2025-07-14 20:07:50.860402
+Create Date: 2025-08-04 11:42:40.210674
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '84f4941e2064'
+revision = '48d6a1c7e9ee'
 down_revision = None
 branch_labels = None
 depends_on = None

@@ -5,7 +5,7 @@ from app.forms.auth_forms import LoginForm, RegisterForm
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.auth import auth
 
-@auth.route('/login', methods=['GET', 'POST'])
+@auth.route('/', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
@@ -14,7 +14,7 @@ def login():
             login_user(user)
             flash('Login realizado com sucesso!', 'success')
             return redirect(url_for('tasks.task_list'))
-        flash('Usuário ou senha inválidos', 'danger')
+        flash('Usuario ou senha invalidos', 'danger')
     return render_template('auth/login.html', form=form)
 
 @auth.route('/register', methods=['GET', 'POST'])

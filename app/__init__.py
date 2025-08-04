@@ -1,12 +1,18 @@
+import os
 from flask import Flask
-from config import Config
+import config
 from extensions import db, login_manager, migrate
  
 login_manager.login_view ='auth.login'
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object(Config)
+
+    env = os.environ.get("FLASK_ENV", "development")
+    if env == "production":
+        app.config.from_object(config.ProductionConfig)
+    else:
+        app.config.from_object(config.DevelopmentConfig)
     
     db.init_app(app)
     migrate.init_app(app, db)
@@ -24,7 +30,7 @@ def create_app():
 
     from app.tasks import tasks_bp 
     from app.tasks import routes
-    app.register_blueprint(tasks_bp)  # Registra o blueprint de tarefas
+    app.register_blueprint(tasks_bp)  
 
    
     
