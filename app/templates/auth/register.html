@@ -1,11 +1,79 @@
 {% extends 'base.html' %}
+
+{% block title %}Cadastro - TaskHub{% endblock %}
+
 {% block content %}
-<h2>Cadastro</h2>
-<form method="POST">
-    {{ form.hidden_tag() }} 
-    {{ form.username.label }} {{ form.username() }} <br>
-    {{ form.password.label}} {{ form.password() }}<br>
-    {{ form.confirm.label }} {{ form.confirm()}}<br>
-    {{ form.submit() }}
-</form>
+<div class="row shadow rounded overflow-hidden" style="min-height: 550px;">
+
+    <!-- Lado Esquerdo com Gradiente -->
+    <div class="col-md-6 d-flex flex-column justify-content-center align-items-center text-white"
+         style="background: linear-gradient(135deg, #ff6f61, #d63384);">
+        <div class="p-4 text-center">
+            <h2 class="fw-bold mb-3">👤 Crie sua conta no <span class="text-warning">TaskHub</span>!</h2>
+            <p class="lead">Gerencie tarefas, organize sua vida e aumente sua produtividade.</p>
+            <ul class="list-unstyled mt-4">
+                <li>✔ Cadastro rápido e seguro</li>
+                <li>✔ Acesso ao seu painel de tarefas</li>
+                <li>✔ Totalmente gratuito</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Formulário -->
+    <div class="col-md-6 bg-white d-flex flex-column justify-content-center">
+        <div class="p-5">
+            <!-- Logo (opcional) -->
+            <div class="text-center mb-4">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo TaskHub" style="width: 80px;">
+            </div>
+
+            <h3 class="text-center mb-4"><i class="bi bi-person-plus-fill"></i> Criar Conta</h3>
+
+            <form method="POST">
+                {{ form.hidden_tag() }}
+
+                <!-- Usuário -->
+                <div class="mb-3">
+                    <label class="form-label">Usuário</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light"><i class="bi bi-person"></i></span>
+                        {{ form.username(class="form-control", placeholder="Escolha um nome de usuário...") }}
+                    </div>
+                </div>
+
+                <!-- Senha -->
+                <div class="mb-3">
+                    <label class="form-label">Senha</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light"><i class="bi bi-lock-fill"></i></span>
+                        {{ form.password(class="form-control", placeholder="Crie uma senha segura...") }}
+                    </div>
+                </div>
+
+                <!-- Confirmação -->
+                <div class="mb-4">
+                    <label class="form-label">Confirmar Senha</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light"><i class="bi bi-check-circle-fill"></i></span>
+                        {{ form.confirm(class="form-control", placeholder="Repita a senha...") }}
+                    </div>
+                </div>
+
+                <!-- Botão -->
+                <div class="d-grid mb-3">
+                    <button type="submit" class="btn btn-success btn-lg">
+                        <i class="bi bi-check2-square"></i> Cadastrar
+                    </button>
+                </div>
+
+                <!-- Link de login -->
+                <div class="text-center">
+                    <p class="text-muted">Já tem uma conta?
+                        <a href="{{ url_for('auth.login') }}" class="fw-bold text-decoration-none">Entrar</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}
