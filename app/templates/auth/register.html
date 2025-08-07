@@ -5,7 +5,6 @@
 {% block content %}
 <div class="row shadow rounded overflow-hidden" style="min-height: 550px;">
 
-    <!-- Lado Esquerdo com Gradiente -->
     <div class="col-md-6 d-flex flex-column justify-content-center align-items-center text-white"
          style="background: linear-gradient(135deg, #ff6f61, #d63384);">
         <div class="p-4 text-center">
@@ -19,10 +18,8 @@
         </div>
     </div>
 
-    <!-- Formulário -->
     <div class="col-md-6 bg-white d-flex flex-column justify-content-center">
         <div class="p-5">
-            <!-- Logo (opcional) -->
             <div class="text-center mb-4">
                 <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo TaskHub" style="width: 80px;">
             </div>
@@ -32,7 +29,6 @@
             <form method="POST">
                 {{ form.hidden_tag() }}
 
-                <!-- Usuário -->
                 <div class="mb-3">
                     <label class="form-label">Usuário</label>
                     <div class="input-group">
@@ -40,8 +36,6 @@
                         {{ form.username(class="form-control", placeholder="Escolha um nome de usuário...") }}
                     </div>
                 </div>
-
-                <!-- Senha -->
                 <div class="mb-3">
                     <label class="form-label">Senha</label>
                     <div class="input-group">
@@ -50,7 +44,6 @@
                     </div>
                 </div>
 
-                <!-- Confirmação -->
                 <div class="mb-4">
                     <label class="form-label">Confirmar Senha</label>
                     <div class="input-group">
@@ -58,15 +51,11 @@
                         {{ form.confirm(class="form-control", placeholder="Repita a senha...") }}
                     </div>
                 </div>
-
-                <!-- Botão -->
                 <div class="d-grid mb-3">
                     <button type="submit" class="btn btn-success btn-lg">
                         <i class="bi bi-check2-square"></i> Cadastrar
                     </button>
                 </div>
-
-                <!-- Link de login -->
                 <div class="text-center">
                     <p class="text-muted">Já tem uma conta?
                         <a href="{{ url_for('auth.login') }}" class="fw-bold text-decoration-none">Entrar</a>
