@@ -5,7 +5,7 @@
 {% block content %}
 <div class="row shadow rounded overflow-hidden" style="min-height: 550px;">
 
-    <!-- Lado Esquerdo com Gradiente e Texto -->
+    
     <div class="col-md-6 d-flex flex-column justify-content-center align-items-center text-white"
          style="background: linear-gradient(135deg, #6f42c1, #8e44ad);">
         <div class="p-4 text-center">
@@ -18,11 +18,9 @@
             </ul>
         </div>
     </div>
-
-    <!-- Lado Direito: Formulário -->
     <div class="col-md-6 bg-white d-flex flex-column justify-content-center">
         <div class="p-5">
-            <!-- Logo no topo (opcional) -->
+            
             <div class="text-center mb-4">
                 <img src="{{ url_for('static', filename='logo.png') }}" alt="TaskHub Logo" style="width: 80px;">
             </div>
@@ -32,7 +30,7 @@
             <form method="POST">
                 {{ form.hidden_tag() }}
 
-                <!-- Usuário -->
+                
                 <div class="mb-3">
                     <label class="form-label">Usuário</label>
                     <div class="input-group">
@@ -41,7 +39,7 @@
                     </div>
                 </div>
 
-                <!-- Senha -->
+                
                 <div class="mb-4">
                     <label class="form-label">Senha</label>
                     <div class="input-group">
@@ -50,14 +48,14 @@
                     </div>
                 </div>
 
-                <!-- Botão Entrar -->
+                
                 <div class="d-grid mb-3">
                     <button type="submit" class="btn btn-primary btn-lg">
                         <i class="bi bi-box-arrow-in-right"></i> Entrar
                     </button>
                 </div>
 
-                <!-- Link para Cadastro -->
+                
                 <div class="text-center">
                     <p class="text-muted">Não possui conta?
                         <a href="{{ url_for('auth.register') }}" class="fw-bold text-decoration-none">Cadastre-se</a>
