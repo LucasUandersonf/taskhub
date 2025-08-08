@@ -61,5 +61,22 @@ def delete_task(task_id):
     return redirect(url_for('tasks.task_list'))
 
 
+@tasks_bp.route("/dashboard")
+@login_required
+def dashboard():
+    total_tasks = Task.query.filter_by(user_id = current_user.id).count()
+    completed_tasks = Task.query.filter_by( user_id = current_user.id, done=True).count()
+    pending_tasks = total_tasks - completed_tasks
+    tasks = Task.query.filter_by(user_id = current_user.id).all()
+
+    return render_template(
+        'tasks/dashboard.html',
+        tasks = tasks,
+        total_tasks = total_tasks, 
+        completed_tasks = completed_tasks,
+        pending_tasks = peding_tasks
+    )
+
+
 
 
