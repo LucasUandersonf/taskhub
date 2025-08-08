@@ -1,1 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}Minhas Tarefas - TaskHub{% endblock %}
 
+{% block content %}
+<h1 class="mb-4 fw-bold text-primary">Minhas Tarefas</h1>
+
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card text-white bg-primary shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-list-task"></i> Total</h5>
+                <p class="card-text fs-3 fw-bold">{{ total_tasks }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-success shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-check-circle-fill"></i> Concluídas</h5>
+                <p class="card-text fs-3 fw-bold">{{ completed_tasks }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-warning shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-hourglass-split"></i> Pendentes</h5>
+                <p class="card-text fs-3 fw-bold">{{ pending_tasks }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    {% for task in tasks %}
+    <div class="col-md-4 mb-3">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body">
+                <h5 class="card-title {% if task.done %}text-success{% else %}text-dark{% endif %}">
+                    {{ task.title }}
+                </h5>
+                <p class="card-text">{{ task.description }}</p>
+                <span class="badge {% if task.done %}bg-success{% else %}bg-warning{% endif %}">
+                    {% if task.done %}Concluída{% else %}Pendente{% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
