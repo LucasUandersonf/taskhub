@@ -13,7 +13,7 @@ def login():
         if user and check_password_hash(user.password, form.password.data):
             login_user(user)
             flash('Login realizado com sucesso!', 'success')
-            return redirect(url_for('tasks.task_list'))
+            return redirect(url_for('tasks.dashboard'))
         flash('Usuario ou senha invalidos', 'danger')
     return render_template('auth/login.html', form=form)
 
