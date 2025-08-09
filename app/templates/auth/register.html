@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base_auth.html' %}
 
 {% block title %}Cadastro - TaskHub{% endblock %}
 
@@ -21,7 +21,7 @@
     <div class="col-md-6 bg-white d-flex flex-column justify-content-center">
         <div class="p-5">
             <div class="text-center mb-4">
-                <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo TaskHub" style="width: 80px;">
+                <img src="{{ url_for('static', filename='logo.jpeg') }}" alt="Logo TaskHub" style="width: 270px;">
             </div>
 
             <h3 class="text-center mb-4"><i class="bi bi-person-plus-fill"></i> Criar Conta</h3>
