@@ -64,17 +64,25 @@ def delete_task(task_id):
 @tasks_bp.route("/dashboard")
 @login_required
 def dashboard():
-    total_tasks = Task.query.filter_by(user_id = current_user.id).count()
-    completed_tasks = Task.query.filter_by( user_id = current_user.id, done=True).count()
-    pending_tasks = total_tasks - completed_tasks
-    tasks = Task.query.filter_by(user_id = current_user.id).all()
+    tasks = Task.query.filter_by(user_id=current_user.id).all()
+
+    total_completed = sum(1 for t in tasks if t.completed)
+    total_pending = len(tasks) - total_completed
+
+    tasks_per_day = {}
+    for t in tasks: 
+        date_str = t.created_at.strftime("%y-%m-%d")
+        tasks_per_day[date_str] = tasks_per_day.get(date_str, 0) + 1
+    
+    dates = list(tasks_per_day.keys())
+    counts = list(tasks_per_day.values())
 
     return render_template(
-        'tasks/dashboard.html',
-        tasks = tasks,
-        total_tasks = total_tasks, 
-        completed_tasks = completed_tasks,
-        pending_tasks = peding_tasks
+        "dashboard.html",
+        total_completed = total_completed,
+        total_pending = total_pending,
+        dates = dates,
+        counts=counts
     )
 
 
