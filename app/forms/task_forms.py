@@ -5,5 +5,5 @@ from wtforms.validators import DataRequired, EqualTo, Length
 class TaskForm(FlaskForm):
     title = StringField('Título', validators= [DataRequired(), Length(min = 1, max=140)])
     description = TextAreaField('Descrição')
-    done = BooleanField('Concluida')
+    completed = BooleanField('Concluida')
     submit = SubmitField('Salvar')

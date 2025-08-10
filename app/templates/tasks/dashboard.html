@@ -1,50 +1,132 @@
-{% extends 'base.html' %}
-{% block title %}Minhas Tarefas - TaskHub{% endblock %}
+{% extends "base.html" %}
 
 {% block content %}
-<h1 class="mb-4 fw-bold text-primary">Minhas Tarefas</h1>
+<div class="container mt-5">
+  <h2 class="mb-4 fw-bold fw-bold">📊 Dashboard</h2>
 
-<div class="row mb-4">
-    <div class="col-md-4">
-        <div class="card text-white bg-primary shadow-sm">
-            <div class="card-body">
-                <h5 class="card-title"><i class="bi bi-list-task"></i> Total</h5>
-                <p class="card-text fs-3 fw-bold">{{ total_tasks }}</p>
-            </div>
-        </div>
+  <div class="row g-4">
+    <div class="col-md-6">
+      <div class="card shadow-sm border-0 rounded-4 p-4 h-100">
+        <h5 class="card-title mb-3 text-secondary">Tarefas Concluídas vs Pendentes</h5>
+        <canvas id="barChart" style="max-height: 320px;"></canvas>
+      </div>
     </div>
-    <div class="col-md-4">
-        <div class="card text-white bg-success shadow-sm">
-            <div class="card-body">
-                <h5 class="card-title"><i class="bi bi-check-circle-fill"></i> Concluídas</h5>
-                <p class="card-text fs-3 fw-bold">{{ completed_tasks }}</p>
-            </div>
-        </div>
+
+    <div class="col-md-6">
+      <div class="card shadow-sm border-0 rounded-4 p-4 h-100">
+        <h5 class="card-title mb-3 text-secondary">Tarefas Criadas por Dia</h5>
+        <canvas id="lineChart" style="max-height: 320px;"></canvas>
+      </div>
     </div>
-    <div class="col-md-4">
-        <div class="card text-white bg-warning shadow-sm">
-            <div class="card-body">
-                <h5 class="card-title"><i class="bi bi-hourglass-split"></i> Pendentes</h5>
-                <p class="card-text fs-3 fw-bold">{{ pending_tasks }}</p>
-            </div>
-        </div>
-    </div>
+  </div>
 </div>
-<div class="row">
-    {% for task in tasks %}
-    <div class="col-md-4 mb-3">
-        <div class="card shadow-sm border-0 h-100">
-            <div class="card-body">
-                <h5 class="card-title {% if task.done %}text-success{% else %}text-dark{% endif %}">
-                    {{ task.title }}
-                </h5>
-                <p class="card-text">{{ task.description }}</p>
-                <span class="badge {% if task.done %}bg-success{% else %}bg-warning{% endif %}">
-                    {% if task.done %}Concluída{% else %}Pendente{% endif %}
-                </span>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const totalCompleted = {{ total_completed | tojson }};
+  const totalPending = {{ total_pending | tojson }};
+  const dates = {{ dates | tojson }};
+  const counts = {{ counts | tojson }};
+
+  const barCtx = document.getElementById('barChart').getContext('2d');
+  new Chart(barCtx, {
+    type: 'bar',
+    data: {
+      labels: ['Concluídas', 'Pendentes'],
+      datasets: [{
+        label: 'Tarefas',
+        data: [totalCompleted, totalPending],
+        backgroundColor: ['#198754', '#dc3545'],
+        borderRadius: 6,
+        maxBarThickness: 40,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        title: {
+          display: false,
+          text: 'Tarefas Concluídas vs Pendentes'
+        },
+        tooltip: {
+          enabled: true,
+          backgroundColor: '#212529',
+          titleColor: '#fff',
+          bodyColor: '#fff',
+          cornerRadius: 4,
+          padding: 8,
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: {
+            stepSize: 1,
+            color: '#495057'
+          },
+          grid: {
+            color: '#e9ecef'
+          }
+        },
+        x: {
+          ticks: { color: '#495057' },
+          grid: { display: false }
+        }
+      }
+    }
+  });
+
+  const lineCtx = document.getElementById('lineChart').getContext('2d');
+  new Chart(lineCtx, {
+    type: 'line',
+    data: {
+      labels: dates,
+      datasets: [{
+        label: 'Tarefas Criadas',
+        data: counts,
+        borderColor: '#0d6efd',
+        backgroundColor: 'rgba(13, 110, 253, 0.2)',
+        fill: true,
+        tension: 0.3,
+        pointRadius: 5,
+        pointBackgroundColor: '#0d6efd',
+        pointHoverRadius: 7,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          labels: { color: '#495057', font: { weight: '600' } }
+        },
+        title: { display: false },
+        tooltip: {
+          backgroundColor: '#212529',
+          titleColor: '#fff',
+          bodyColor: '#fff',
+          cornerRadius: 4,
+          padding: 8,
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: {
+            stepSize: 1,
+            color: '#495057'
+          },
+          grid: { color: '#e9ecef' }
+        },
+        x: {
+          ticks: { color: '#495057' },
+          grid: { display: false }
+        }
+      }
+    }
+  });
+</script>
 {% endblock %}

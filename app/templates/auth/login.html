@@ -1,68 +1,48 @@
 {% extends 'base_auth.html' %}
-
 {% block title %}Login - TaskHub{% endblock %}
 
 {% block content %}
-<div class="row shadow rounded overflow-hidden" style="min-height: 550px;">
-
-    
-    <div class="col-md-6 d-flex flex-column justify-content-center align-items-center text-white"
-         style="background: linear-gradient(135deg, #6f42c1, #8e44ad);">
-        <div class="p-4 text-center">
-            <h2 class="fw-bold mb-3">👋 Bem-vindo ao <span class="text-warning">TaskHub</span>!</h2>
-            <p class="lead">Sua central de tarefas, produtividade e organização pessoal.</p>
-            <ul class="list-unstyled mt-4">
-                <li>✔ Organize suas prioridades</li>
-                <li>✔ Defina prazos e metas</li>
-                <li>✔ Acompanhe seu progresso</li>
-            </ul>
-        </div>
+<div class="d-flex justify-content-center align-items-center vh-100 " >
+  <div class="card shadow-lg p-4 animate__animated animate__fadeInDown" style="width: 400px; border-radius: 1rem;">
+    <div class="text-center mb-4">
+      <img src="{{ url_for('static', filename='logo.jpeg') }}"
+           alt="TaskHub Logo"
+           style="width: 130px;"
+           class="mb-2 animate__animated animate__zoomIn animate__delay-1s">
+      <h4 class="fw-bold animate__animated animate__fadeInUp animate__delay-1s">TaskHub</h4>
     </div>
-    <div class="col-md-6 bg-white d-flex flex-column justify-content-center">
-        <div class="p-5">
-            
-            <div class="text-center mb-4">
-                <img src="{{ url_for('static', filename='logo.jpeg') }}" alt="TaskHub Logo" style="width: 270px;">
-            </div>
-
-            <h3 class="text-center mb-4"><i class="bi bi-door-open-fill"></i> Acesse sua conta</h3>
-
-            <form method="POST">
-                {{ form.hidden_tag() }}
-
-                
-                <div class="mb-3">
-                    <label class="form-label">Usuário</label>
-                    <div class="input-group">
-                        <span class="input-group-text bg-light"><i class="bi bi-person-circle"></i></span>
-                        {{ form.username(class="form-control", placeholder="Digite seu nome de usuário...") }}
-                    </div>
-                </div>
-
-                
-                <div class="mb-4">
-                    <label class="form-label">Senha</label>
-                    <div class="input-group">
-                        <span class="input-group-text bg-light"><i class="bi bi-lock-fill"></i></span>
-                        {{ form.password(class="form-control", placeholder="Digite sua senha...") }}
-                    </div>
-                </div>
-
-                
-                <div class="d-grid mb-3">
-                    <button type="submit" class="btn btn-primary btn-lg">
-                        <i class="bi bi-box-arrow-in-right"></i> Entrar
-                    </button>
-                </div>
-
-                
-                <div class="text-center">
-                    <p class="text-muted">Não possui conta?
-                        <a href="{{ url_for('auth.register') }}" class="fw-bold text-decoration-none">Cadastre-se</a>
-                    </p>
-                </div>
-            </form>
+    <h5 class="mb-3 text-center text-muted animate__animated animate__fadeInUp animate__delay-2s">Acesse sua conta</h5>
+    <form method="POST" class="animate__animated animate__fadeIn animate__delay-3s">
+      {{ form.hidden_tag() }}
+      <div class="mb-3">
+        <label for="username" class="form-label">Usuário</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-person"></i></span>
+          {{ form.username(class="form-control", placeholder="Digite seu nome de usuário", id="username", autocomplete="username", required=True) }}
         </div>
+        {% for error in form.username.errors %}
+          <div class="text-danger small mt-1">{{ error }}</div>
+        {% endfor %}
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Senha</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+          {{ form.password(class="form-control", placeholder="Digite sua senha", id="password", autocomplete="current-password", required=True) }}
+        </div>
+        {% for error in form.password.errors %}
+          <div class="text-danger small mt-1">{{ error }}</div>
+        {% endfor %}
+      </div>
+      <button type="submit" class="btn btn-primary w-100 mt-3">
+        <i class="bi bi-box-arrow-in-right me-1"></i> Entrar
+      </button>
+    </form>
+    <div class="text-center mt-3 animate__animated animate__fadeIn animate__delay-4s">
+      <small class="text-muted">Não possui conta?
+        <a href="{{ url_for('auth.register') }}">Cadastre-se</a>
+      </small>
     </div>
+  </div>
 </div>
 {% endblock %}

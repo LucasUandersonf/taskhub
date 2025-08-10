@@ -16,7 +16,7 @@ class Task(db.Model):
     id = db.Column(db.Integer,primary_key = True)
     title = db.Column(db.String(140), nullable=False)
     description = db.Column(db.Text)
-    done = db.Column(db.Boolean, default= False)
+    completed = db.Column(db.Boolean, default= False)
     timestamp = db.Column(db.DateTime, default = datetime.now)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 

@@ -2,54 +2,54 @@
 {% block title %}Minhas Tarefas - TaskHub{% endblock %}
 
 {% block content %}
+<h1 class="mb-4 fw-bold">Minhas Tarefas</h1>
+
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2 class="fw-bold text-primary">📋 Minhas Tarefas</h2>
-    <a href="{{ url_for('tasks.create_task') }}" class="btn btn-success">
-        <i class="bi bi-plus-circle-fill"></i> Nova Tarefa
-    </a>
+  <a href="{{ url_for('tasks.create_task') }}" class="btn  rounded-pill px-4 shadow-sm button">
+    <i class="bi bi-plus-circle-fill me-2"></i> Nova Tarefa
+  </a>
 </div>
 
 {% if tasks %}
-<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-    {% for task in tasks %}
-    <div class="col">
-        <div class="card shadow-sm h-100 border-{{ 'success' if task.done else 'warning' }}">
-            <div class="card-body d-flex flex-column justify-content-between">
-                <h5 class="card-title text-primary">
-                    <i class="bi bi-check2-square me-1"></i> {{ task.title }}
-                </h5>
-
-                {% if task.description %}
-                <p class="card-text text-muted">{{ task.description }}</p>
-                {% endif %}
-
-                <p class="small text-secondary mb-2">
-                    <i class="bi bi-clock-history me-1"></i>
-                    Criada em: {{ task.timestamp.strftime('%d/%m/%Y %H:%M') }}
-                </p>
-
-                <span class="badge {% if task.done %}bg-success{% else %}bg-warning text-dark{% endif %}">
-                    {% if task.done %}Concluída{% else %}Pendente{% endif %}
-                </span>
-            </div>
-
-            <div class="card-footer bg-transparent d-flex justify-content-between">
-                <a href="{{ url_for('tasks.edit_task', task_id=task.id) }}" class="btn btn-outline-primary btn-sm">
-                    <i class="bi bi-pencil-fill"></i> Editar
-                </a>
-                <form action="{{ url_for('tasks.delete_task', task_id=task.id) }}" method="POST" class="d-inline">
-                    <button type="submit" class="btn btn-outline-danger btn-sm">
-                        <i class="bi bi-trash-fill"></i> Excluir
-                    </button>
-                </form>
-            </div>
-        </div>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+  {% for task in tasks %}
+  <div class="col">
+    <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden 
+            {% if task.completed %}task-border-success{% else %}task-border-warning{% endif %}">
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title d-flex align-items-center gap-2 mb-3">
+          <i class="bi {{ 'bi-check2-square text-success' if task.completed else 'bi-clock text-warning' }}"></i>
+          {{ task.title }}
+        </h5>
+        {% if task.description %}
+        <p class="card-text text-secondary flex-grow-1">{{ task.description }}</p>
+        {% endif %}
+        <small class="text-muted mb-3 d-block">
+          <i class="bi bi-calendar-event me-1"></i>
+          Criada em: {{ task.timestamp.strftime('%d/%m/%Y %H:%M') }}
+        </small>
+        <span class="badge rounded-pill {% if task.completed %}bg-success{% else %}bg-warning text-dark{% endif %} px-3 py-2 align-self-start">
+          {% if task.completed %}Concluída{% else %}Pendente{% endif %}
+        </span>
+      </div>
+      <div class="card-footer bg-transparent d-flex justify-content-between pt-3 border-top">
+        <a href="{{ url_for('tasks.edit_task', task_id=task.id) }}" class="btn btn-sm btn-outline-success rounded-pill px-3 d-flex align-items-center gap-1">
+          <i class="bi bi-pencil-fill"></i> Editar
+        </a>
+        <form action="{{ url_for('tasks.delete_task', task_id=task.id) }}" method="POST" class="m-0">
+          <button type="submit" class="btn btn-sm btn-outline-danger rounded-pill px-3 d-flex align-items-center gap-1">
+            <i class="bi bi-trash-fill"></i> Excluir
+          </button>
+        </form>
+      </div>
     </div>
-    {% endfor %}
+  </div>
+  {% endfor %}
 </div>
 {% else %}
-<div class="alert alert-info text-center" role="alert">
-    <i class="bi bi-info-circle-fill"></i> Nenhuma tarefa cadastrada.
+<div class="alert alert-info rounded d-flex align-items-center gap-2">
+  <i class="bi bi-info-circle-fill fs-4"></i>
+  Nenhuma tarefa cadastrada.
 </div>
 {% endif %}
 {% endblock %}

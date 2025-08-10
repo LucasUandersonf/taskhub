@@ -18,7 +18,7 @@ def create_task():
         task =Task(
             title = form.title.data,
             description = form.description.data,
-            done = form.done.data,
+            completed = form.completed.data,
             owner = current_user
         )
         db.session.add(task)
@@ -41,7 +41,7 @@ def edit_task(task_id):
     if form.validate_on_submit():
         task.title = form.title.data
         task.description = form.description.data        
-        task.done = form.done.data
+        task.completed = form.completed.data
         db.session.commit()
         flash('Tarefa atualizada com sucesso!','success')
         return redirect(url_for('tasks.task_list'))
@@ -71,14 +71,14 @@ def dashboard():
 
     tasks_per_day = {}
     for t in tasks: 
-        date_str = t.created_at.strftime("%y-%m-%d")
+        date_str = t.timestamp.strftime("%y-%m-%d")
         tasks_per_day[date_str] = tasks_per_day.get(date_str, 0) + 1
     
     dates = list(tasks_per_day.keys())
     counts = list(tasks_per_day.values())
 
     return render_template(
-        "dashboard.html",
+        "tasks/dashboard.html",
         total_completed = total_completed,
         total_pending = total_pending,
         dates = dates,

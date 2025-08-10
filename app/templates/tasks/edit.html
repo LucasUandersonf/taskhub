@@ -2,31 +2,46 @@
 {% block title %}Editar Tarefa - TaskHub{% endblock %}
 
 {% block content %}
-  <h2 class="mb-4">Editar Tarefa</h2>
-  <form method="POST">
+
+
+<div class="card shadow-sm rounded-4 p-4 mx-auto" style="max-width: 600px;">
+<h1 class="h2 mb-4 fw-bold d-flex align-items-center gap-2">
+  <span>✏️</span> Editar Tarefa
+</h1>
+
+  <form method="POST" novalidate class="w-100">
     {{ form.hidden_tag() }}
 
-    <div class="mb-3">
-      {{ form.title.label(class="form-label") }}
-      {{ form.title(class="form-control") }}
-      {% for error in form.title.errors %}
-        <div class="text-danger">{{ error }}</div>
-      {% endfor %}
+    <div class="mb-4">
+      {{ form.title.label(class="form-label fw-semibold") }}
+      {{ form.title(class="form-control", placeholder="Digite o título da tarefa", aria_describedby="titleHelp") }}
+      {% if form.title.errors %}
+        <div id="titleHelp" class="form-text text-danger mt-1">
+          {% for error in form.title.errors %}{{ error }}{% if not loop.last %}<br>{% endif %}{% endfor %}
+        </div>
+      {% endif %}
     </div>
 
-    <div class="mb-3">
-      {{ form.description.label(class="form-label") }}
-      {{ form.description(class="form-control") }}
-      {% for error in form.description.errors %}
-        <div class="text-danger">{{ error }}</div>
-      {% endfor %}
+    <div class="mb-4">
+      {{ form.description.label(class="form-label fw-semibold") }}
+      {{ form.description(class="form-control", placeholder="Descreva a tarefa", rows="3") }}
+      {% if form.description.errors %}
+        <div class="form-text text-danger mt-1">
+          {% for error in form.description.errors %}{{ error }}{% if not loop.last %}<br>{% endif %}{% endfor %}
+        </div>
+      {% endif %}
     </div>
 
-    <div class="form-check mb-3">
-      {{ form.done(class="form-check-input") }}
-      {{ form.done.label(class="form-check-label") }}
+    <div class="form-check mb-4">
+      {{ form.completed(class="form-check-input", id="completedCheck") }}
+      <label class="form-check-label fw-semibold" for="completedCheck">
+        Tarefa Concluída
+      </label>
     </div>
 
-    <button type="submit" class="btn btn-primary">✏️ Atualizar Tarefa</button>
+    <button type="submit" class="btn button btn-lg w-100 shadow-sm" aria-label="Atualizar tarefa">
+      Atualizar Tarefa
+    </button>
   </form>
+</div>
 {% endblock %}
