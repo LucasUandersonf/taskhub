@@ -1,77 +1,49 @@
 # 🚀 TaskHub — Gerenciador de Tarefas Pessoal
 
-[![Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)](https://github.com/LucasUandersonf/TaskHub)
-[![Python](https://img.shields.io/badge/python-3.10+-blue)](https://www.python.org/)
-[![Flask](https://img.shields.io/badge/flask-2.3.2-lightgrey)](https://flask.palletsprojects.com/)
-[![Testes](https://img.shields.io/badge/testes-pytest-green)](https://docs.pytest.org/)
-[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
-
-> ✨ Um gerenciador de tarefas moderno, seguro e intuitivo. Organize seu dia com eficiência e estilo usando o **TaskHub**.
-
----
-
-![TaskHub Demo](https://user-images.githubusercontent.com/SEU_USUARIO/taskhub-demo.gif)
-
----
-
-## 📚 Índice
-
-- [📌 Sobre](#sobre)
-- [⚙️ Funcionalidades](#funcionalidades)
-- [🧪 Tecnologias Utilizadas](#tecnologias-utilizadas)
-- [🚀 Instalação e Configuração](#instalação-e-configuração)
-- [🧭 Como Usar](#como-usar)
-- [🧪 Testes](#testes)
-- [🎥 Demonstração](#demonstração)
-- [🖼️ Screenshots](#screenshots)
-- [🗺️ Roadmap](#roadmap)
-- [❓ FAQ](#faq)
-- [🤝 Contribuição](#contribuição)
-- [📄 Licença](#licença)
-- [📬 Contato](#contato)
+✨ Um gerenciador de tarefas moderno, seguro e intuitivo. Organize seu dia com eficiência e estilo usando o TaskHub.
 
 ---
 
 ## 📌 Sobre
 
-**TaskHub** é uma aplicação web desenvolvida com **Python + Flask**, voltada para o gerenciamento pessoal de tarefas. Com arquitetura escalável, segurança robusta e uma interface responsiva baseada em **Bootstrap 5**, o TaskHub é ideal para quem busca produtividade sem complicações.
+TaskHub é uma aplicação web desenvolvida em Python com Flask, voltada para o gerenciamento pessoal de tarefas. Com arquitetura escalável, segurança robusta e interface responsiva baseada em Bootstrap 5, o TaskHub oferece uma solução completa para aumentar sua produtividade.
 
-> 🧠 Arquitetura limpa com Application Factory  
-> 🧩 Modularização com Blueprints  
-> 🔐 Autenticação segura com Flask-Login
+- 🧠 Arquitetura limpa com Application Factory  
+- 🧩 Modularização com Blueprints  
+- 🔐 Autenticação segura com Flask-Login  
 
 ---
 
 ## ⚙️ Funcionalidades
 
-- 🔐 Autenticação completa (cadastro, login, logout)
-- 📝 CRUD de tarefas com prioridade, status e datas
-- 🎯 Filtros inteligentes para organização eficiente
-- 📱 Interface responsiva e moderna com Bootstrap 5
-- 💬 Feedback em tempo real via mensagens flash
-- 🧩 Estrutura modular para fácil manutenção
-- 🔄 Migrações com Flask-Migrate e SQLAlchemy
-- ✅ Testes automatizados com Pytest
+- 🔐 Registro, login e logout de usuários  
+- 📝 CRUD completo de tarefas (criar, listar, editar, excluir)  
+- 🎯 Filtros por prioridade, status e datas  
+- 📱 Interface responsiva com Bootstrap 5  
+- 💬 Feedback instantâneo via mensagens flash  
+- 🔄 Migrações automáticas de banco com Flask-Migrate  
+- ✅ Testes automatizados com pytest e medição de cobertura  
+- ☁️ Deploy em ambiente cloud (Render)  
 
 ---
 
 ## 🧪 Tecnologias Utilizadas
 
-| 💻 Frontend     | 🧠 Backend      | 🗄️ Banco de Dados | 🧪 Testes        |
-|----------------|----------------|-------------------|------------------|
-| Bootstrap 5    | Python 3.10+   | SQLite            | Pytest           |
-| HTML5, CSS3    | Flask 2.3.2    | SQLAlchemy ORM    | Flask-Testing    |
+| Frontend       | Backend                  | Banco de Dados           | Testes               | Deploy     |
+|----------------|--------------------------|-------------------------|----------------------|------------|
+| HTML5, CSS3    | Python 3.10+, Flask 2.3.2| SQLite (dev) / PostgreSQL (prod) | pytest, pytest-cov    | Render     |
+| Bootstrap 5    | Flask-Login, Flask-WTF   | SQLAlchemy ORM          | Flask-Testing        |            |
 
 ---
 
 ## 🚀 Instalação e Configuração
 
-### 🔧 Pré-requisitos
+### Pré-requisitos
 
-- Python 3.10+
-- Git
+- Python 3.10+  
+- Git  
 
-### 📦 Passos para rodar localmente
+### Passos para rodar localmente
 
 ```bash
 # Clonar o repositório
@@ -194,5 +166,47 @@ Consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
 📧 Email: lucasuandersonfs@outlook.com
 
 ---
+
+Relatório Final — Projeto TaskHub
+
+Visão Geral:
+TaskHub é um sistema web para gerenciamento de tarefas com autenticação, interface responsiva e arquitetura escalável, desenvolvido como projeto completo para portfólio aplicando boas práticas profissionais.
+
+Objetivos:
+	•	Aprender e aplicar Flask profissionalmente
+	•	CRUD protegido por autenticação
+	•	Padrões e arquitetura de mercado (App Factory, Blueprints, ORM, Migrations)
+	•	MVP pronto para produção
+	•	Testes automatizados para garantir qualidade
+
+Principais Funcionalidades:
+	•	Registro e login com Flask-Login
+	•	CRUD completo de tarefas com controle de acesso por usuário
+	•	Interface responsiva com Bootstrap
+	•	Migrações automáticas com Flask-Migrate
+	•	Deploy em Render
+	•	Testes com pytest e cobertura
+
+Arquitetura e Boas Práticas:
+	•	App Factory para múltiplos ambientes
+	•	Modularização com Blueprints
+	•	ORM + Migrations para banco
+	•	Camada de formulários separada (Flask-WTF)
+	•	Segurança com hashing de senha
+	•	Testes unitários e integração
+
+Aprendizados e Resultados:
+	•	Domínio de arquitetura Flask profissional
+	•	Experiência com deploy e problemas de produção
+	•	Uso de ORM e migrações reais
+	•	Implementação de testes e métricas de qualidade
+	•	Projeto pronto para portfólio e entrevistas
+
+Próximos Passos:
+	•	Sistema de prioridade para tarefas
+	•	Filtros e busca avançada
+	•	API REST para mobile
+	•	Melhorias de design com componentes customizados
+
 
 > 💙 Obrigado por conferir o **TaskHub**. Sua produtividade merece uma ferramenta à altura!
